@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {io} from 'socket.io-client';
 
 const SOCKET_ENDPOINT = 'localhost:3000';
 
@@ -9,28 +10,23 @@ const SOCKET_ENDPOINT = 'localhost:3000';
 })
 export class ChatInboxComponent implements OnInit {
 
-
-
-  public message: string = 'my first message';
+  socket;
+  public message: string = 'my message 2';
   constructor() { }
   ngOnInit() {
     this.setupSocketConnection();
   }
 
-  setupSocketConnection() {
-  //   this.socket.on('message-broadcast', (data: string) => {
-  //     if (data) {
-  //       console.log("data received", data);
-  //     }
-  //  });
-  }
+
+setupSocketConnection() {
+  this.socket = io(SOCKET_ENDPOINT);
+  this.socket.on('message-broadcast', (data: string) => {
+  console.log('message-broadcast', data);
+ });
+}
 
   sendMessage() {
-    // this.socket.emit('message', this.message);
-    // this.message = '';
+    this.socket.emit('message', this.message);
   }
-
-
-
 
 }

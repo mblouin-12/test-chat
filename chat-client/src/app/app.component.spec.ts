@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'lucca-chat'`, () => {
+  it(`should have as title 'chat-client'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('lucca-chat');
+    expect(app.title).toEqual('chat-client');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('lucca-chat app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('chat-client app is running!');
   });
 });
