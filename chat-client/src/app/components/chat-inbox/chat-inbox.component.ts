@@ -1,32 +1,65 @@
-import { Component, OnInit } from '@angular/core';
-import {io} from 'socket.io-client';
-
-const SOCKET_ENDPOINT = 'localhost:3000';
+import { ChatService } from './../../services/chat/chat.service';
+import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren, AfterViewInit, ViewChild } from '@angular/core';
+import { Message } from './../../classes/message';
+import { UserService } from 'src/app/services/user/user.service';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-chat-inbox',
   templateUrl: './chat-inbox.component.html',
   styleUrls: ['./chat-inbox.component.scss']
 })
-export class ChatInboxComponent implements OnInit {
+export class ChatInboxComponent implements OnInit, AfterViewInit {
 
-  socket;
-  public message: string = 'my message 2';
-  constructor() { }
+  public text_message: string;
+  public show_advanced_editor = false;
+  public quill_modules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'color': [] }],
+      ['link', 'image', 'video']
+    ]
+  };
+
+  @ViewChildren('message') messageElements: QueryList<ElementRef>;
+
+  constructor(
+    private chatService: ChatService,
+    public userService: UserService,
+    public messageService: MessageService,
+    ) { }
+
   ngOnInit() {
-    this.setupSocketConnection();
+  }
+
+  async ngAfterViewInit() {
+    this.messageElements.changes.subscribe(async () => {
+      if (this.messageElements && this.messageElements.last) {
+        await this.sleep(50);
+        this.messageElements.last.nativeElement.scrollIntoView(false);
+      }
+    });
+  }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 
-setupSocketConnection() {
-  this.socket = io(SOCKET_ENDPOINT);
-  this.socket.on('message-broadcast', (data: string) => {
-  console.log('message-broadcast', data);
- });
-}
-
   sendMessage() {
-    this.socket.emit('message', this.message);
+    if (this.text_message.trim() !== '') {
+      this.chatService.sendMessage(this.text_message);
+      this.text_message = '';
+    }
+  }
+
+  isFromUser(m: Message) {
+    return m.user_id === this.userService.getConnectedUserId();
+  }
+
+  getMessageUser(m: Message) {
+    return this.userService.getUsers().find(user => user.id === m.user_id)?.name;
   }
 
 }

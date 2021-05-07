@@ -1,0 +1,33 @@
+@import "~@angular/material/theming";
+@import 'color-theming';
+@import 'text-theming';
+@import 'component-theming';
+
+@function my-light-theme($primary, $accent, $warn: mat-palette($mat-red), $success: mat-palette($mat-green)) {
+  @return map-merge(mat-light-theme($primary, $accent, $warn), (success: $success));
+}
+
+@function my-dark-theme($primary, $accent, $warn: mat-palette($mat-red), $success: mat-palette($mat-green)) {
+  @return map-merge(mat-dark-theme($primary, $accent, $warn), (success: $success));
+}
+
+$angular-default-theme: my-light-theme($app-primary, $app-accent, $app-warn, $app-success);
+
+@include angular-material-theme($angular-default-theme);
+@include text-theme($angular-default-theme);
+@include component-theme($angular-default-theme);
+
+$angular-dark-theme:  my-dark-theme($app-dark-primary, $app-dark-accent, $app-dark-warn, $app-dark-success);
+.darkMode {
+  @include angular-material-color($angular-dark-theme);
+  @include text-theme($angular-dark-theme);
+  @include component-theme($angular-dark-theme);
+}
+
+.logo{
+  filter: brightness(0);
+}
+
+.darkMode .logo{
+  filter: none;
+}

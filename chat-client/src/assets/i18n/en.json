@@ -1,0 +1,18 @@
+{
+	"Cancel": "Cancel",
+	"Connect": "Connect",
+	"Define your name": "Define your name",
+	"Enter your message here": "Enter your message here",
+	"Hello world chat": "Hello world chat",
+	"Name is required": "Name is required",
+	"Update your user details": "Profil Update",
+	"Validate": "Validate",
+	"Welcome to this web chat test": "Welcome to this web chat test",
+	"Please, enter your name to connect": "Please, enter your name to connect",
+	"user_number": "Users ({{nb}})",
+	"Switch editor": "Switch editor",
+	"Send your message": "Send",
+	"welcome-user": "Welcome to this chat!",
+	"new-user": "{{name}} is connected.",
+	"disconnected-user": "{{name}} is disconnected."
+}

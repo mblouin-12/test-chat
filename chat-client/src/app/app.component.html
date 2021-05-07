@@ -1,1 +1,35 @@
-<app-chat-inbox></app-chat-inbox>
+<div fxFill fxLayout="column" [ngSwitch]="userService.isConnected()" class="mat-app-background">
+    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+        <img class="logo" src="assets/lucca-white.png">
+        <span class="text-primary" translate>
+            Hello world chat
+        </span>
+
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+                <mat-icon class="text-primary" [ngClass]="{'text-grey': theme_control.value==true}">light_mode</mat-icon>
+                <mat-slide-toggle [formControl]="theme_control" color="primary"></mat-slide-toggle>
+                <mat-icon class="text-primary" [ngClass]="{'text-grey': theme_control.value==false}">nights_stay</mat-icon>
+            </div>
+
+            <mat-form-field class="lang">
+                <mat-select [(value)]="current_language" (selectionChange)="useLanguage()">
+                    <mat-option [value]="'en'">English</mat-option>
+                    <mat-option [value]="'fr'">Français</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+    </mat-toolbar>
+
+    <app-user-connect fxFlex *ngSwitchCase="false"></app-user-connect>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="start stretch" *ngSwitchCase="true" class="page-content">
+        <app-user-list class="sub-card-background" fxFlex="30" fxLayout="column"></app-user-list>
+        <app-chat-inbox fxFlex fxLayout="column"></app-chat-inbox>
+    </div>
+
+
+</div>

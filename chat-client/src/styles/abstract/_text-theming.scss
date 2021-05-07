@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+
+@mixin text-color($config-or-theme) {
+    // Extract the color configuration in case a theme has been passed.
+    // This allows consumers to either pass a theme object or a color configuration.
+    $config: mat-get-color-config($config-or-theme);
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($config, primary);
+    $accent: map-get($config, accent);
+    $success: map-get($config, success);
+    $warn: map-get($config, warn);
+
+    // Define any styles affected by the theme.
+    .text-primary {
+      color: mat-color($primary);
+    }
+    .text-grey{
+      color: grey;
+    }
+    .text-accent {
+      color: mat-color($accent);
+    }
+
+    .text-success {
+      color: mat-color($success);
+    }
+
+    .text-warn {
+      color: mat-color($warn);
+    }
+
+    .text-bold {
+      font-weight: bold;
+    }
+
+    .text-lighter {
+      font-weight: lighter;
+    }
+  }
+
+  @mixin text-theme($theme) {
+    // Extracts the color from the theme.
+    $color: mat-get-color-config($theme);
+
+    // Do not generate styles if configurations for individual theming
+    // systems have been explicitly set to `null`.
+    @if $color != null {
+      @include text-color($color);
+    }
+  }

@@ -1,0 +1,72 @@
+@import './src/styles/abstract/color-theming';
+:host{
+    height: 100%;
+    max-height: 100%;
+}
+
+.user-nb{
+    text-align: center;
+    padding: 8px 16px;
+    color: white;
+}
+
+.users-wrapper{
+    overflow-y: auto;
+}
+
+.user-row{
+    padding: 16px;
+}
+
+.user-icon{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    transform: rotate(-20deg);
+    margin-right: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.status{
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: mat-color($app-warn, 500);
+}
+.status.online{
+    background: mat-color($app-success, 500);
+}
+.first-letter{
+    opacity:0.8;
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: bold;
+}
+.first-letter:not(.text-primary){
+    color: white;
+}
+.name{
+    font-size: 1.2em;
+}
+
+.my-profile{
+    padding: 32px;
+}
+.my-profile .name{
+    font-weight: bold;
+}
+.my-profile .user-icon{
+    height: 50px;
+    width: 50px;
+}
+.my-profile .first-letter{
+    font-size: 46px;
+    line-height: 50px;
+}

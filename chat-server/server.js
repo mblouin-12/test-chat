@@ -1,21 +1,46 @@
+const { disconnect } = require('process');
+
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http, {
     cors: {
       origin: '*',
     }
-  }) ;
+  });
+
+let users = [];
 
 app.get('/', (req, res) => res.send('hello!'));
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('message', (msg) => {
-    console.log(msg);
-    socket.broadcast.emit('message-broadcast', msg);
-   });
-});
 
-http.listen(3000, () => {
-  console.log('listening on *:3000');
+  socket.on('new-user', (user) => {
+    users.push(user);
+    io.emit('users-broadcast', users);
+  })
+
+  socket.on('message', (msg) => {
+    socket.broadcast.emit('message-broadcast', msg);
+  });
+
+  socket.on('user-update', (updated_user) => {
+    var user = users.find(u => u.id==updated_user.id)
+    if (user) {
+      Object.assign(user, updated_user);
+      socket.broadcast.emit('users-broadcast', users);
+    }
+  });
+
+  socket.on('user-disconnect', (user_id) => {
+    // users = users.filter(u => u.id !==user_id);
+    var user = users.find(u => u.id==user_id)
+    if (user) {
+      user.connected = false;
+      socket.broadcast.emit('users-broadcast', users);
+    }
+  });
+
 });
+io.of
+
+http.listen(3000, () => {});

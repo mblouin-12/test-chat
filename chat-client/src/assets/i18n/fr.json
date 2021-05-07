@@ -1,0 +1,18 @@
+{
+	"Cancel": "Annuler",
+	"Connect": "Se connecter",
+	"Define your name": "Entre ton nom",
+	"Enter your message here": "Entre ton message ici",
+	"Hello world chat": "Hello world chat",
+	"Name is required": "Le nom est obligatoire",
+	"Update your user details": "Configuration du profil",
+	"Validate": "Valider",
+	"Welcome to this web chat test": "Bienvenue sur cette plateforme de chat web ",
+	"Please, enter your name to connect": "Entre ton nom pour accéder au chat",
+	"user_number": "Utilisateurs ({{nb}})",
+	"Switch editor": "Changer d'éditeur",
+	"Send your message": "Envoyer",
+	"welcome-user": "Bienvenue sur ce chat!",
+	"new-user": "{{name}} vient de se connecter.",
+	"disconnected-user": "{{name}} s'est déconnecté."
+}

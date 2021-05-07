@@ -1,0 +1,87 @@
+@import './src/styles/abstract/color-theming';
+:host{
+    padding: 4px 0px;
+}
+.messages-wrapper{
+    height: calc(100% - 100px);
+    padding: 0 32px;
+    overflow-y: auto;
+}
+.input-message{
+    height: 100px;
+    padding: 0 32px;
+}
+.input-message textarea{
+    resize: none;
+    max-height: 100px;
+}
+
+.messages-wrapper.with-quill-msg{
+    height: calc(100% - 200px);
+}
+.input-message.quill-msg{
+    height: 200px;
+}
+.sent{
+    align-items: center;
+    justify-content: flex-end;
+    text-align:end
+}
+.middle{
+    align-items: center;
+    justify-content: center;
+}
+.user-info{
+    width:100%;
+    text-align:center;
+    font-style: italic;
+    opacity: 0.7;
+    padding-top: 16px;
+    padding-bottom: 8px;
+}
+.message{
+    width: 70%;
+    margin-top: 16px;
+}
+.sender{
+    opacity: 0.8;
+    margin-bottom: 4px;
+    font-size: 0.8em;
+}
+.date{
+    opacity: 0.8;
+    font-size: 0.8em;
+}
+.text{
+    border-radius: 8px;
+}
+.text:not(.bg-primary-light) {
+    border: 2px solid mat-color($app-primary, 400);
+}
+
+.mat-form-field-wrapper {
+    padding-bottom: 0px;
+}
+
+.editor{
+    position: relative;
+    padding-top: 8px;
+}
+
+.send-button{
+    margin-bottom: 1.3em;
+}
+
+.quill-msg .send-button{
+    margin-bottom: 0;
+}
+
+.expand-button{
+    position: absolute;
+    bottom: 32px;
+    right: 0;
+}
+
+.quill-msg .expand-button{
+    bottom: 0px;
+}
