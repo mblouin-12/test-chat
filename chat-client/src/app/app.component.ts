@@ -1,9 +1,7 @@
-import { UserService } from './services/user/user.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { Component, HostBinding, HostListener, OnInit } from '@angular/core';
-import { ChatService } from './services/chat/chat.service';
-import {TranslateService} from '@ngx-translate/core';
-import { ThemeService } from './services/theme/theme.service';
-import { FormControl } from '@angular/forms';
+import { ChatService } from 'src/app/services/chat/chat.service';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
@@ -12,36 +10,25 @@ import { OverlayContainer } from '@angular/cdk/overlay';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent{
-  title = 'chat-client';
-  public theme_control = new FormControl(false);
-  public current_language = 'en';
+  title = 'Chat Lucca';
+  private darkClassName = 'darkMode';
 
   @HostBinding('class') className = '';
 
   constructor(
     private chatService: ChatService,
     public userService: UserService,
-    private translate: TranslateService,
-    private themeService: ThemeService,
-    private overlay: OverlayContainer,
+    public themeService: ThemeService,
+    public overlay: OverlayContainer,
     ) {
-      this.theme_control.valueChanges.subscribe((darkMode) => {
-        this.themeService.setDarkMode(darkMode);
-      });
-
-      const darkClassName = 'darkMode';
       this.themeService.getDarkModeObservable().subscribe( darkMode => {
-        this.className = darkMode ? darkClassName : '';
+        this.className = darkMode ? this.darkClassName : '';
         if (darkMode) {
-          this.overlay.getContainerElement().classList.add(darkClassName);
+          this.overlay.getContainerElement().classList.add(this.darkClassName);
         } else {
-          this.overlay.getContainerElement().classList.remove(darkClassName);
+          this.overlay.getContainerElement().classList.remove(this.darkClassName);
         }
       });
-
-      this.theme_control.setValue(true);
-      translate.setDefaultLang('en');
-      translate.use('en');
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -50,7 +37,5 @@ export class AppComponent{
       return;
   }
 
-  useLanguage() {
-    this.translate.use(this.current_language);
-  }
+
 }

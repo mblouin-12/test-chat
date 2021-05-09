@@ -1,8 +1,8 @@
-import { UserService } from './../user/user.service';
-import { MessageService } from './../message/message.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { MessageService } from 'src/app/services/message/message.service';
 import { Injectable } from '@angular/core';
 import {io, Socket} from 'socket.io-client';
-import { Message } from 'src/app/classes/message';
+import { DisconnectedUserMessage, Message, NewUserMessage, WelcomeMessage } from 'src/app/classes/message';
 import { User } from 'src/app/classes/user';
 
 const SOCKET_ENDPOINT = 'localhost:3000';
@@ -14,14 +14,13 @@ export class ChatService {
 
   private socket: Socket;
 
-  constructor(private messageService: MessageService, private userService: UserService) { }
-
+  constructor(private messageService: MessageService, private userService: UserService) {
+    this.socket = io(SOCKET_ENDPOINT);
+  }
 
   setupSocketConnection(user: User) {
-    this.socket = io(SOCKET_ENDPOINT);
-
     this.socket.emit('new-user', user);
-    this.messageService.addMessage(new Message('', '', 'welcome'));
+    this.messageService.addMessage(new WelcomeMessage());
 
     this.socket.on('message-broadcast', (data: Message) => {
       if (data) {
@@ -33,9 +32,9 @@ export class ChatService {
         users.map(u => {
           const prev_usuer = this.userService.getUsers().find(prev_u => prev_u.id === u.id);
           if (!prev_usuer) {
-            this.messageService.addMessage(new Message(u.name, '', 'new'));
+            this.messageService.addMessage(new NewUserMessage(u.name));
           } else if (prev_usuer.connected && !u.connected) {
-            this.messageService.addMessage(new Message(u.name, '', 'disconnected'));
+            this.messageService.addMessage(new DisconnectedUserMessage(u.name));
           }
         });
       }
@@ -44,7 +43,7 @@ export class ChatService {
   }
 
   sendMessage(text_message: string) {
-    const message = new Message(text_message, this.userService.getConnectedUser().id);
+    const message = new Message(text_message, this.userService.getConnectedUserId());
     this.socket.emit('message', message);
     this.messageService.addMessage(message);
   }

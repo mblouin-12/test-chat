@@ -6,9 +6,6 @@
     $config: mat-get-color-config($config-or-theme);
     // Extract the palettes you need from the theme definition.
     $primary: map-get($config, primary);
-    $accent: map-get($config, accent);
-    $success: map-get($config, success);
-    $warn: map-get($config, warn);
 
     // Define any styles affected by the theme.
     .text-primary {
@@ -16,25 +13,6 @@
     }
     .text-grey{
       color: grey;
-    }
-    .text-accent {
-      color: mat-color($accent);
-    }
-
-    .text-success {
-      color: mat-color($success);
-    }
-
-    .text-warn {
-      color: mat-color($warn);
-    }
-
-    .text-bold {
-      font-weight: bold;
-    }
-
-    .text-lighter {
-      font-weight: lighter;
     }
   }
 

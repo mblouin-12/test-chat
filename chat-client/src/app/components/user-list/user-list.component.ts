@@ -1,8 +1,7 @@
-import { UserService } from '../../services/user/user.service';
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/classes/user';
+import { UserService } from 'src/app/services/user/user.service';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UserEditDialogComponent } from '../user-edit-dialog/user-edit-dialog.component';
+import { UserEditDialogComponent } from 'src/app/components/user-edit-dialog/user-edit-dialog.component';
 import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({

@@ -10,7 +10,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -28,6 +27,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { UserConnectComponent } from './components/user-connect/user-connect.component';
 import { UserEditDialogComponent } from './components/user-edit-dialog/user-edit-dialog.component';
 import { SortByFieldPipe } from './pipes/sort-by-field.pipe';
+import { HeaderComponent } from './components/header/header.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -41,7 +41,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     UserListComponent,
     UserConnectComponent,
     UserEditDialogComponent,
-    SortByFieldPipe
+    SortByFieldPipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatToolbarModule,
     FlexLayoutModule,
     MatDialogModule,
-    MatButtonToggleModule,
     MatSlideToggleModule,
     MatSelectModule,
     MatTooltipModule,

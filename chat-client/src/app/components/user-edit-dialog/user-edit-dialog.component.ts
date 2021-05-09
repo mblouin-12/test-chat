@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/classes/user';
@@ -9,7 +9,7 @@ import { User } from 'src/app/classes/user';
   templateUrl: './user-edit-dialog.component.html',
   styleUrls: ['./user-edit-dialog.component.scss']
 })
-export class UserEditDialogComponent implements OnInit {
+export class UserEditDialogComponent {
 
   public nameFormControl = new FormControl('', [Validators.required]);
   constructor(
@@ -18,11 +18,8 @@ export class UserEditDialogComponent implements OnInit {
       this.nameFormControl.setValue(user?.name);
     }
 
-  ngOnInit(): void {
-  }
-
   validate() {
-    if (this.nameFormControl.invalid) {
+    if (this.nameFormControl.invalid || this.nameFormControl.value.trim().length === 0) {
       this.nameFormControl.markAsTouched();
     } else {
       this.dialogRef.close(this.nameFormControl.value);

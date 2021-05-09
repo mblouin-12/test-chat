@@ -4,20 +4,15 @@
 }
 .messages-wrapper{
     height: calc(100% - 100px);
-    padding: 0 32px;
+    padding: 8px 32px;
     overflow-y: auto;
+}
+.messages-wrapper.with-quill-msg{
+    height: calc(100% - 200px);
 }
 .input-message{
     height: 100px;
     padding: 0 32px;
-}
-.input-message textarea{
-    resize: none;
-    max-height: 100px;
-}
-
-.messages-wrapper.with-quill-msg{
-    height: calc(100% - 200px);
 }
 .input-message.quill-msg{
     height: 200px;
@@ -47,6 +42,10 @@
     opacity: 0.8;
     margin-bottom: 4px;
     font-size: 0.8em;
+    max-width: calc(100% - 80px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .date{
     opacity: 0.8;
@@ -55,17 +54,14 @@
 .text{
     border-radius: 8px;
 }
-.text:not(.bg-primary-light) {
+.text.bg-card {
     border: 2px solid mat-color($app-primary, 400);
 }
-
-.mat-form-field-wrapper {
-    padding-bottom: 0px;
-}
-
 .editor{
     position: relative;
-    padding-top: 8px;
+}
+.mat-form-field-wrapper {
+    padding-bottom: 0px;
 }
 
 .send-button{

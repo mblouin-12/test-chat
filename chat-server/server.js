@@ -1,5 +1,3 @@
-const { disconnect } = require('process');
-
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http, {
@@ -32,7 +30,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('user-disconnect', (user_id) => {
-    // users = users.filter(u => u.id !==user_id);
     var user = users.find(u => u.id==user_id)
     if (user) {
       user.connected = false;
@@ -41,6 +38,5 @@ io.on('connection', (socket) => {
   });
 
 });
-io.of
 
 http.listen(3000, () => {});

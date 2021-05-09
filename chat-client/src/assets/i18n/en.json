@@ -8,11 +8,12 @@
 	"Update your user details": "Profil Update",
 	"Validate": "Validate",
 	"Welcome to this web chat test": "Welcome to this web chat test",
-	"Please, enter your name to connect": "Please, enter your name to connect",
-	"user_number": "Users ({{nb}})",
-	"Switch editor": "Switch editor",
+	"Please, enter your name to connect": "Please, enter your name to join the chat",
+	"user_number": "Other users ({{nb}})",
+	"Hide advanced options": "Hide advanced options",
+    "Show advanced options": "Show advanced options",
 	"Send your message": "Send",
 	"welcome-user": "Welcome to this chat!",
-	"new-user": "{{name}} is connected.",
-	"disconnected-user": "{{name}} is disconnected."
+	"new-user": "{{name}} has joined the conversation.",
+	"disconnected-user": "{{name}} has left the conversation."
 }

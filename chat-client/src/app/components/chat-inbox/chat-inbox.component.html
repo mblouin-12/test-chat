@@ -1,15 +1,15 @@
 <div class="messages-wrapper" [ngClass]="{'with-quill-msg': show_advanced_editor}">
-    <div #message *ngFor="let m of messageService.getMessages()" fxLayout="row" [ngClass]="{'sent': isFromUser(m), 'middle': !m.user_id}" [ngSwitch]="m.type">
+    <div #message *ngFor="let m of messageService.getMessages()" fxLayout="row" [ngClass]="{'sent': isFromUser(m), 'middle': m.type !== 'msg'}" [ngSwitch]="m.type">
         <div class="message" fxLayout="column"  *ngSwitchCase="'msg'">
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <span class="sender">{{getMessageUser(m)}}</span>
                 <i class="date">{{m.date | date: 'shortTime'}}</i>
             </div>
-            <quill-view class="text" [ngClass]="{'bg-primary':  isFromUser(m), 'bg-card': !isFromUser(m)}" [content]="m.text" [styles]="{'font-size': '1.1em'}" ></quill-view>
+            <quill-view class="text" [ngClass]="{'bg-primary':  isFromUser(m), 'bg-card': !isFromUser(m)}" [content]="m.text" [styles]="{'font-size': '1.1em'}"></quill-view>
         </div>
-        <div *ngSwitchCase="'welcome'" [translate]="'welcome-user'" class="user-info"></div>
-        <div *ngSwitchCase="'new'" [translate]="'new-user'" [translateParams]="{name: m.text}" class="user-info"></div>
-        <div *ngSwitchCase="'disconnected'" [translate]="'disconnected-user'" [translateParams]="{name: m.text}" class="user-info"></div>
+        <div *ngSwitchCase="'welcome'" translate class="user-info">welcome-user</div>
+        <div *ngSwitchCase="'new'" translate [translateParams]="{name: m.text}" class="user-info">new-user</div>
+        <div *ngSwitchCase="'disconnected'" translate [translateParams]="{name: m.text}" class="user-info">disconnected-user</div>
     </div>
 </div>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px" class="input-message" [ngClass]="{'quill-msg': show_advanced_editor}">
@@ -21,11 +21,11 @@
         [styles]="{height: '150px'}">
         </quill-editor>
         <mat-form-field *ngSwitchCase="false" fxFlex appearance="outline">
-            <textarea matInput [(ngModel)]="text_message"
+            <input matInput [(ngModel)]="text_message"
             (keyup.enter)="sendMessage()"
-            [placeholder]="'Enter your message here'|translate"></textarea>
+            [placeholder]="'Enter your message here'|translate">
         </mat-form-field>
-        <button class="expand-button" mat-icon-button (click)="show_advanced_editor=!show_advanced_editor" [matTooltip]="'Switch editor'|translate">
+        <button class="expand-button" mat-icon-button (click)="expandEditor()" [matTooltip]="getExpandEditorTooltip()|translate">
             <mat-icon>{{show_advanced_editor?'unfold_less':'unfold_more'}}</mat-icon>
         </button>
     </div>

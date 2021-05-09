@@ -3,34 +3,30 @@ import { UserService } from './user.service';
 
 describe('UserService', () => {
   let service: UserService;
+  const name = 'user 1';
+  let user: User;
+  let users: Array<User>;
 
   beforeEach(() => {
     service = new UserService();
+    user = service.connectAs(name);
+    users = [user, new User('user 2'), new User('user 3')];
+    service.setUsers(users);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  const name = 'user 1';
-  const user = service.connectAs(name);
 
   it('#connectAs user should set name and id and be connected', () => {
     expect(user.name).toEqual(name);
     expect(user.connected).toBe(true);
     expect(user.id).toBeDefined();
-  });
-
-  it('#getConnectedUserId user should be the one just connected', () => {
     expect(service.getConnectedUserId()).toEqual(user.id);
-  });
-
-  it('#isConnected should return true', () => {
     expect(service.isConnected()).toBe(true);
   });
 
-  const users = [user, new User('user 2'), new User('user 3')];
-  service.setUsers(users);
 
   it('#getUsers should return array of 3 elements', () => {
     expect(service.getUsers()?.length).toBe(3);

@@ -12,7 +12,18 @@ describe('ChatService', () => {
   beforeEach(() => {
     messageService = new MessageService();
     userService = new UserService();
-    service = new ChatService(messageService, userService);
+
+    const userServiceSpy =
+      jasmine.createSpyObj('UserService', ['getConnectedUser', 'getConnectedUserId', 'getUsers']);
+
+    const stub_user = new User('user 1');
+    const stub_users = [stub_user,  new User('user 2'),  new User('user 3')];
+    userServiceSpy.getConnectedUser.and.returnValue(stub_user);
+    userServiceSpy.getConnectedUserId.and.returnValue(stub_user.id);
+    userServiceSpy.getUsers.and.returnValue(stub_users);
+
+
+    service = new ChatService(messageService, userServiceSpy);
   });
 
   it('should be created', () => {
@@ -20,19 +31,19 @@ describe('ChatService', () => {
   });
 
   const user = new User('user 1');
-  service.setupSocketConnection(user);
 
   it('should receive a welcome message', () => {
+    service.setupSocketConnection(user);
     expect(messageService.getMessages().length).toBe(1);
-    expect(messageService.getMessages()[1].type).toEqual('welcome');
+    expect(messageService.getMessages()[0].type).toEqual('welcome');
   });
 
   const text_msg = 'my text message';
-  service.sendMessage(text_msg);
   it('message should be added into message list', () => {
-    expect(messageService.getMessages().length).toBe(2);
-    expect(messageService.getMessages()[1].text).toEqual(text_msg);
-    expect(messageService.getMessages()[1].type).toEqual('msg');
+    service.sendMessage(text_msg);
+    expect(messageService.getMessages().length).toBe(1);
+    expect(messageService.getMessages()[0].text).toEqual(text_msg);
+    expect(messageService.getMessages()[0].type).toEqual('msg');
   });
 
 });

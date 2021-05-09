@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { map } from 'lodash-es';
 
 @Pipe({
   name: 'sortByFieldPipe'

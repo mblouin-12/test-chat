@@ -9,10 +9,11 @@
 	"Validate": "Valider",
 	"Welcome to this web chat test": "Bienvenue sur cette plateforme de chat web ",
 	"Please, enter your name to connect": "Entre ton nom pour accéder au chat",
-	"user_number": "Utilisateurs ({{nb}})",
-	"Switch editor": "Changer d'éditeur",
+	"user_number": "Autres utilisateurs ({{nb}})",
+	"Hide advanced options": "Cacher les options avancées",
+    "Show advanced options": "Afficher les options avancées",
 	"Send your message": "Envoyer",
 	"welcome-user": "Bienvenue sur ce chat!",
-	"new-user": "{{name}} vient de se connecter.",
-	"disconnected-user": "{{name}} s'est déconnecté."
+	"new-user": "{{name}} vient de rejoindre la conversation",
+	"disconnected-user": "{{name}} vient de quitter la conversation."
 }

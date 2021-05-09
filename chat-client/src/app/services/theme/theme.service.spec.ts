@@ -24,11 +24,10 @@ describe('Service: Theme', () => {
 
   it('#getDarkModeObservable should return value from observable',
     (done: DoneFn) => {
-      service.setDarkMode(true);
       service.getDarkModeObservable().subscribe(value => {
         expect(value).toBe(true);
         done();
       });
-      expect(service.getDarkModeObservable).toHaveBeenCalled();
+      service.setDarkMode(true);
   });
 });

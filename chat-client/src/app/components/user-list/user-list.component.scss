@@ -7,7 +7,6 @@
 .user-nb{
     text-align: center;
     padding: 8px 16px;
-    color: white;
 }
 
 .users-wrapper{
@@ -18,10 +17,15 @@
     padding: 16px;
 }
 
+.connected-user{
+    max-width: calc( 100% - 40px);
+}
+
 .user-icon{
     border-radius: 50%;
     width: 40px;
     height: 40px;
+    min-width:40px;
     position: relative;
     transform: rotate(-20deg);
     margin-right: 32px;
@@ -54,6 +58,9 @@
 }
 .name{
     font-size: 1.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .my-profile{
@@ -65,6 +72,7 @@
 .my-profile .user-icon{
     height: 50px;
     width: 50px;
+    min-width:50px;
 }
 .my-profile .first-letter{
     font-size: 46px;

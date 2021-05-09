@@ -7,27 +7,8 @@
   // Extract the palettes you need from the theme definition.
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
-  $success: map-get($config, success);
-  $warn: map-get($config, warn);
   $foreground: map-get($config, foreground);
   $background: map-get($config, background);
-
-  // Define any styles affected by the theme.
-  .absolute-field {
-    .mat-form-field-flex {
-      background-color: map-get($background, card);
-    }
-  }
-
-  .buttons-container {
-    button+button {
-      margin-left: 10px;
-    }
-  }
-
-  .scrollbar-thumb {
-    background-color: mat-color($primary);
-  }
 
   .bg-primary-dark {
     background-color: mat-color($primary, 700);
@@ -37,32 +18,13 @@
     background-color: mat-color($primary);
     color: white;
   }
-  .bg-primary-light {
-    background-color: mat-color($primary, 300);
-    color: black;
-  }
-
-  .bg-accent {
-    background-color: mat-color($accent);
-  }
-  .bg-light-accent {
-    background-color: mat-color($accent, 0.5);
-  }
-
-  .bg-success {
-    background-color: mat-color($success);
-  }
-
-  .bg-warn {
-    background-color: mat-color($warn);
-  }
 
   .bg-card {
     background-color: mat-color($background, card);
   }
 
-  .list-bg:nth-child(2n+1) {
-    background-color: mat-color($foreground, text, 0.12);
+  .list-bg:nth-child(2n) {
+    background-color: mat-color($foreground, text, 0.04);
   }
   .sub-card-background{
     background: mat-color($foreground, text, 0.04);

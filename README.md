@@ -1,12 +1,11 @@
 # Hello world chat
 
-Here you will be able to laucnh locally a hello world chat.
-You will need to launch server and client to make it work.
-You will be able to join the main channel with every other connected user, send and receive some messages.
- - You can use the advanced editor to access more functionnality (send images, videos, formatted text) or the quick editor to send simple messages.
+Here you will be able to launch locally a hello world chat.
+You will need to launch server and client to make it works.
+You will be able to join the chat channel with every other connected user, send and receive some messages.
+ - You can use the advanced editor to access advanced functionalities (send images, videos, formatted text) or the simple editor to send quickly text messages.
 - You can use this chat in French or in English.
 - Choose your favorite theme (dark or light)
-
 
 
 # Set up the Development Environment
@@ -41,3 +40,6 @@ Previously, run `npm install` in chat-client folder
 Then, to launch client:
 `cd chat-client`
 `ng serve --open`
+
+You can run unit tests by launching
+`ng test`

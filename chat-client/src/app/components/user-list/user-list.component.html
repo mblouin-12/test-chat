@@ -1,5 +1,5 @@
 <div class="my-profile" *ngIf="userService.getConnectedUser()" fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="row" fxLayoutAlign="start center" class="connected-user">
         <div class="user-icon bg-primary-dark">
             <span class="first-letter">{{userService.getConnectedUser().name[0]}}</span>
             <span class="status" [ngClass]="{'online': true}"></span>
@@ -11,7 +11,7 @@
     </button>
 </div>
 
-<span class="user-nb bg-primary-dark" [translate]="'user_number'" [translateParams]="{nb: userService.getOtherUsers()?.length}"></span>
+<span class="user-nb bg-card" [translate]="'user_number'" [translateParams]="{nb: userService.getOtherUsers()?.length}"></span>
 
 <div class="users-wrapper" fxFlex>
     <div *ngFor="let user of userService.getOtherUsers() | sortByFieldPipe : 'connected' : true" fxLayout="row" fxLayoutAlign="start center" class="user-row list-bg">

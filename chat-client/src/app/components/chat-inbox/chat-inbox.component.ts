@@ -1,6 +1,6 @@
-import { ChatService } from './../../services/chat/chat.service';
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren, AfterViewInit, ViewChild } from '@angular/core';
-import { Message } from './../../classes/message';
+import { ChatService } from 'src/app/services/chat/chat.service';
+import { Component, ElementRef, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
+import { Message } from 'src/app/classes/message';
 import { UserService } from 'src/app/services/user/user.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
@@ -9,15 +9,15 @@ import { MessageService } from 'src/app/services/message/message.service';
   templateUrl: './chat-inbox.component.html',
   styleUrls: ['./chat-inbox.component.scss']
 })
-export class ChatInboxComponent implements OnInit, AfterViewInit {
+export class ChatInboxComponent implements AfterViewInit {
 
   public text_message: string;
   public show_advanced_editor = false;
   public quill_modules = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'color': [] }],
+      [{ list: 'ordered'}, { list: 'bullet' }],
+      [{ color: [] }],
       ['link', 'image', 'video']
     ]
   };
@@ -29,9 +29,6 @@ export class ChatInboxComponent implements OnInit, AfterViewInit {
     public userService: UserService,
     public messageService: MessageService,
     ) { }
-
-  ngOnInit() {
-  }
 
   async ngAfterViewInit() {
     this.messageElements.changes.subscribe(async () => {
@@ -49,7 +46,7 @@ export class ChatInboxComponent implements OnInit, AfterViewInit {
 
   sendMessage() {
     if (this.text_message.trim() !== '') {
-      this.chatService.sendMessage(this.text_message);
+      this.chatService.sendMessage(this.text_message.trim());
       this.text_message = '';
     }
   }
@@ -62,4 +59,14 @@ export class ChatInboxComponent implements OnInit, AfterViewInit {
     return this.userService.getUsers().find(user => user.id === m.user_id)?.name;
   }
 
+  getExpandEditorTooltip() {
+    if (this.show_advanced_editor) {
+      return 'Hide advanced options';
+    }
+    return 'Show advanced options';
+  }
+
+  expandEditor() {
+    this.show_advanced_editor = !this.show_advanced_editor;
+  }
 }
